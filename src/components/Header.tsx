@@ -87,7 +87,7 @@ const Header: React.FC = () => {
               onClick={() => scrollToSection('about')}
               className="font-anton text-lg transition-colors duration-300 hover:text-[#ffbe4a] text-[#2a3747]"
             >
-              Who We Are
+              About
             </button>
 
             <button
