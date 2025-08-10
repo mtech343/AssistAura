@@ -171,7 +171,7 @@ const Header: React.FC = () => {
                   }}
                   className="block font-anton text-lg text-[#2a3747] hover:text-[#ffbe4a] transition-colors duration-300 px-4 text-left w-full"
                 >
-                  Who We Are
+                  About
                 </button>
                 <button
                   onClick={() => {
