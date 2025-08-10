@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -8,6 +8,7 @@ const Header: React.FC = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +30,31 @@ const Header: React.FC = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
+  const scrollToSection = (sectionId: string) => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
+  const handleLogoClick = () => {
+    if (location.pathname !== '/') {
+      navigate('/');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <header
       className={`fixed top-0 w-full z-40 transition-all duration-300 ${
@@ -36,18 +62,18 @@ const Header: React.FC = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex items-center h-20">
           {/* Logo */}
-          <Link to="/" className="flex-shrink-0">
+          <button onClick={handleLogoClick} className="flex-shrink-0">
             <img
               src="https://i.postimg.cc/FHB1kmL5/ASSistaura-logo.jpg"
               alt="AssistAura Logo"
               className="w-[110px] md:w-[81px] h-20"
             />
-          </Link>
+          </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center justify-center flex-1 space-x-8">
             <Link
               to="/"
               className={`font-anton text-lg transition-colors duration-300 hover:text-[#ffbe4a] ${
@@ -57,14 +83,19 @@ const Header: React.FC = () => {
               Home
             </Link>
             
-            <Link
-              to="/about"
-              className={`font-anton text-lg transition-colors duration-300 hover:text-[#ffbe4a] ${
-                isActive('/about') ? 'text-[#ffbe4a]' : 'text-[#2a3747]'
-              }`}
+            <button
+              onClick={() => scrollToSection('about')}
+              className="font-anton text-lg transition-colors duration-300 hover:text-[#ffbe4a] text-[#2a3747]"
             >
-              About
-            </Link>
+              Who We Are
+            </button>
+
+            <button
+              onClick={() => scrollToSection('reviews')}
+              className="font-anton text-lg transition-colors duration-300 hover:text-[#ffbe4a] text-[#2a3747]"
+            >
+              Reviews
+            </button>
 
             {/* Services Dropdown */}
             <div
@@ -72,7 +103,10 @@ const Header: React.FC = () => {
               onMouseEnter={() => setIsServicesOpen(true)}
               onMouseLeave={() => setIsServicesOpen(false)}
             >
-              <button className="font-anton text-lg text-[#2a3747] hover:text-[#ffbe4a] transition-colors duration-300 flex items-center">
+              <button 
+                onClick={() => scrollToSection('services')}
+                className="font-anton text-lg text-[#2a3747] hover:text-[#ffbe4a] transition-colors duration-300 flex items-center"
+              >
                 Services
                 <ChevronDown className="ml-1 w-4 h-4" />
               </button>
@@ -130,15 +164,35 @@ const Header: React.FC = () => {
                 >
                   Home
                 </Link>
-                <Link
-                  to="/about"
-                  className="block font-anton text-lg text-[#2a3747] hover:text-[#ffbe4a] transition-colors duration-300 px-4"
+                <button
+                  onClick={() => {
+                    scrollToSection('about');
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="block font-anton text-lg text-[#2a3747] hover:text-[#ffbe4a] transition-colors duration-300 px-4 text-left w-full"
+                >
+                  Who We Are
+                </button>
+                <button
+                  onClick={() => {
+                    scrollToSection('reviews');
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="block font-anton text-lg text-[#2a3747] hover:text-[#ffbe4a] transition-colors duration-300 px-4 text-left w-full"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  About
-                </Link>
+                  Reviews
+                </button>
                 <div className="px-4">
-                  <p className="font-anton text-lg text-[#2a3747] mb-2">Services</p>
+                  <button
+                    onClick={() => {
+                      scrollToSection('services');
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="font-anton text-lg text-[#2a3747] mb-2 hover:text-[#ffbe4a] transition-colors duration-300"
+                  >
+                    Services
+                  </button>
                   <div className="pl-4 space-y-2">
                     {services.map((service) => (
                       <Link
