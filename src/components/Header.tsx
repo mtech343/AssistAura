@@ -42,7 +42,7 @@ const Header: React.FC = () => {
             <img
               src="https://i.postimg.cc/FHB1kmL5/ASSistaura-logo.jpg"
               alt="AssistAura Logo"
-              className="h-16 w-20"
+              className="h-16 w-auto"
             />
           </Link>
 
