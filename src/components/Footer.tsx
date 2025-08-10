@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
             <img
               src="https://i.postimg.cc/FHB1kmL5/ASSistaura-logo.jpg"
               alt="AssistAura Logo"
-              className="w-25 h-auto"
+              className="w-21 h-auto"
             />
             <div className="flex space-x-4">
               <a
