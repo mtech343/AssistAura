@@ -138,11 +138,12 @@ const Header: React.FC = () => {
           </nav>
 
           {/* Mobile Menu Button */}
+          <div className="flex-1 md:hidden" />
           <button
-            className="md:hidden p-2 text-[#2a3747] hover:text-[#ffbe4a] transition-colors duration-300"
+            className="md:hidden p-3 text-[#2a3747] hover:text-[#ffbe4a] transition-colors duration-300 rounded-lg hover:bg-gray-100"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>
 
@@ -156,10 +157,10 @@ const Header: React.FC = () => {
               transition={{ duration: 0.3 }}
               className="md:hidden bg-white border-t overflow-hidden"
             >
-              <div className="py-4 space-y-4">
+              <div className="py-6 space-y-1">
                 <Link
                   to="/"
-                  className="block font-anton text-lg text-[#2a3747] hover:text-[#ffbe4a] transition-colors duration-300 px-4"
+                  className="block font-anton text-lg text-[#2a3747] hover:text-[#ffbe4a] hover:bg-gray-50 transition-all duration-300 px-6 py-3 rounded-lg mx-4"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Home
@@ -169,7 +170,7 @@ const Header: React.FC = () => {
                     scrollToSection('about');
                     setIsMobileMenuOpen(false);
                   }}
-                  className="block font-anton text-lg text-[#2a3747] hover:text-[#ffbe4a] transition-colors duration-300 px-4 text-left w-full"
+                  className="block font-anton text-lg text-[#2a3747] hover:text-[#ffbe4a] hover:bg-gray-50 transition-all duration-300 px-6 py-3 rounded-lg mx-4 text-left w-[calc(100%-2rem)]"
                 >
                   About
                 </button>
@@ -178,27 +179,26 @@ const Header: React.FC = () => {
                     scrollToSection('reviews');
                     setIsMobileMenuOpen(false);
                   }}
-                  className="block font-anton text-lg text-[#2a3747] hover:text-[#ffbe4a] transition-colors duration-300 px-4 text-left w-full"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block font-anton text-lg text-[#2a3747] hover:text-[#ffbe4a] hover:bg-gray-50 transition-all duration-300 px-6 py-3 rounded-lg mx-4 text-left w-[calc(100%-2rem)]"
                 >
                   Reviews
                 </button>
-                <div className="px-4">
+                <div className="px-4 pt-2">
                   <button
                     onClick={() => {
                       scrollToSection('services');
                       setIsMobileMenuOpen(false);
                     }}
-                    className="font-anton text-lg text-[#2a3747] mb-2 hover:text-[#ffbe4a] transition-colors duration-300"
+                    className="font-anton text-lg text-[#2a3747] mb-3 hover:text-[#ffbe4a] hover:bg-gray-50 transition-all duration-300 px-2 py-2 rounded-lg block w-full text-left"
                   >
                     Services
                   </button>
-                  <div className="pl-4 space-y-2">
+                  <div className="pl-4 space-y-1">
                     {services.map((service) => (
                       <Link
                         key={service.name}
                         to={service.path}
-                        className="block font-anton text-sm text-[#2a3747] hover:text-[#ffbe4a] transition-colors duration-300"
+                        className="block font-anton text-base text-[#2a3747] hover:text-[#ffbe4a] hover:bg-gray-50 transition-all duration-300 px-3 py-2 rounded-lg"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         {service.name}
